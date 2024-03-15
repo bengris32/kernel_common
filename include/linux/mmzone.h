@@ -421,14 +421,10 @@ struct lru_gen_mm_state {
 	struct list_head *head;
 	/* where the last iteration ended before */
 	struct list_head *tail;
-	/* Unused - keep for ABI compatiiblity */
-	struct wait_queue_head wait;
 	/* Bloom filters flip after each iteration */
 	unsigned long *filters[NR_BLOOM_FILTERS];
 	/* the mm stats for debugging */
 	unsigned long stats[NR_HIST_GENS][NR_MM_STATS];
-	/* Unused - keep for ABI compatiiblity */
-	int nr_walkers;
 };
 
 struct lru_gen_mm_walk {
@@ -438,8 +434,6 @@ struct lru_gen_mm_walk {
 	unsigned long max_seq;
 	/* the next address within an mm to scan */
 	unsigned long next_addr;
-	/* Unused -- for ABI compatibility */
-	unsigned long bitmap[BITS_TO_LONGS(MIN_LRU_BATCH)];
 	/* to batch promoted pages */
 	int nr_pages[MAX_NR_GENS][ANON_AND_FILE][MAX_NR_ZONES];
 	/* to batch the mm stats */
