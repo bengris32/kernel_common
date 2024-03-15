@@ -387,7 +387,7 @@ struct lru_gen_struct {
 	/* the multi-gen LRU lists, lazily sorted on eviction */
 	struct list_head lists[MAX_NR_GENS][ANON_AND_FILE][MAX_NR_ZONES];
 	/* the multi-gen LRU sizes, eventually consistent */
-	unsigned long nr_pages[MAX_NR_GENS][ANON_AND_FILE][MAX_NR_ZONES];
+	long nr_pages[MAX_NR_GENS][ANON_AND_FILE][MAX_NR_ZONES];
 	/* the exponential moving average of refaulted */
 	unsigned long avg_refaulted[ANON_AND_FILE][MAX_NR_TIERS];
 	/* the exponential moving average of evicted+protected */
@@ -441,7 +441,7 @@ struct lru_gen_mm_walk {
 	/* total batched items */
 	int batched;
 	bool can_swap;
-	bool full_scan;
+	bool force_scan;
 };
 
 void lru_gen_init_lruvec(struct lruvec *lruvec);
